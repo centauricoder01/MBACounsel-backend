@@ -14,7 +14,6 @@ const addBanner = async (req, res) => {
     }
 
     const bannerImg = await uploadOnCloudinary(bannerImageLocalPath);
-
     await Banner.create({
       bannerText,
       bannerImg: bannerImg?.url || "",
@@ -29,4 +28,16 @@ const addBanner = async (req, res) => {
   }
 };
 
-export { addBanner };
+const getBanner = async (req, res) => {
+  try {
+    const allBanner = await Banner.find();
+    res.status(400).json({ message: "Banner find successfully", allBanner });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "Internal server Error in controller", error });
+  }
+};
+
+export { addBanner, getBanner };
