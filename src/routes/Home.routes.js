@@ -1,17 +1,18 @@
 import { Router } from "express";
+import { addBanner } from "../controllers/Home/Banner.controller.js";
+import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
 //secured routes
-// router.route("/logout").post(verifyJWT, logoutUser);
-// router.route("/refresh-token").post(refreshAccessToken);
-// router.route("/change-password").post(verifyJWT, changeCurrentPassword);
-// router.route("/current-user").get(verifyJWT, getCurrentUser);
-// router.route("/update-account").patch(verifyJWT, updateAccountDetails);
-
-// MAIN ROUTES START FROM HERE
-
-// router.route("/addbanner").post()
-
+router.route("/addbanner").post(
+  upload.fields([
+    {
+      name: "bannerImg",
+      maxCount: 1,
+    },
+  ]),
+  addBanner,
+);
 
 export default router;
