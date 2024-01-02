@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { addBanner, getBanner } from "../controllers/Home/Banner.controller.js";
+import {
+  addBanner,
+  deleteBanner,
+  getBanner,
+  updateBanner,
+} from "../controllers/Home/Banner.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
@@ -16,4 +21,6 @@ router.route("/addbanner").post(
 );
 
 router.route("/getbanner").get(getBanner);
+router.route("/updatebanner").put(updateBanner);
+router.route("/deletebanner").delete(deleteBanner);
 export default router;

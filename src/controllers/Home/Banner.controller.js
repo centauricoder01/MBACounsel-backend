@@ -40,4 +40,40 @@ const getBanner = async (req, res) => {
   }
 };
 
-export { addBanner, getBanner };
+const updateBanner = async (req, res) => {
+  try {
+    const { id, text } = req.body;
+    const updatedDocument = await Banner.findByIdAndUpdate(
+      id,
+      { $set: { bannerText: text } },
+      { new: true },
+    );
+    if (!updatedDocument) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    res.json({ message: "Document updated successfully", updatedDocument });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "Internal server Error in controller", error });
+  }
+};
+
+const deleteBanner = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const deletedDocument = await Banner.findByIdAndDelete(id);
+
+    if (!deletedDocument) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+
+    res.json({ message: "Document deleted successfully", deletedDocument });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+export { addBanner, getBanner, updateBanner, deleteBanner };
