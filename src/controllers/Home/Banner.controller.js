@@ -7,10 +7,10 @@ const addBanner = async (req, res) => {
     let bannerImageLocalPath;
     if (
       req.files &&
-      Array.isArray(req.files.bannerImg) &&
-      req.files.bannerImg.length > 0
+      Array.isArray(req.files.Img) &&
+      req.files.Img.length > 0
     ) {
-      bannerImageLocalPath = req.files.bannerImg[0].path;
+      bannerImageLocalPath = req.files.Img[0].path;
     }
 
     const bannerImg = await uploadOnCloudinary(bannerImageLocalPath);
@@ -31,11 +31,11 @@ const addBanner = async (req, res) => {
 const getBanner = async (req, res) => {
   try {
     const allBanner = await Banner.find();
-    res.status(400).json({ message: "Banner find successfully", allBanner });
+    res.status(200).json({ message: "Banner find successfully", allBanner });
   } catch (error) {
     console.log(error);
     res
-      .status(500)
+      .status(200)
       .json({ message: "Internal server Error in controller", error });
   }
 };

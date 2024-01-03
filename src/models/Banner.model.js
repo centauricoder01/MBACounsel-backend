@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 const BannerSchema = new Schema({
-  bannerImg: {
+  Img: {
     type: String,
     required: true,
   },
-  bannerText: {
-    type: String,
+  Text: {
+    type: String, 
     required: true,
   },
 });
