@@ -2,7 +2,6 @@ import { Notification } from "../../models/Notification.model.js";
 
 const addNotification = async (req, res) => {
   try {
-    console.log("You you come here ...");
     const { text } = req.body;
     await Notification.create({
       Text: text,
@@ -57,7 +56,7 @@ const updateNotification = async (req, res) => {
       updatedDocument,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error", error });
+    
   }
 };
 
