@@ -55,8 +55,8 @@ router.route("/updateevent").put(updateEvent);
 
 // Banner Ads
 router.route("/addadsbanner").post(addAdsBanner);
-router.route("/updateadsbanner").get(updateAdsBanner);
-router.route("/getadsbanner").delete(getAdsBanner);
-router.route("/deleteadsbanner").put(deleteAdsBanner);
+router.route("/updateadsbanner").put(updateAdsBanner);
+router.route("/getadsbanner").get(getAdsBanner);
+router.route("/deleteadsbanner").delete(deleteAdsBanner);
 
 export default router;

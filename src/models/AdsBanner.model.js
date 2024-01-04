@@ -9,11 +9,11 @@ const adsBannerSchema = new Schema({
     type: String,
     required: [true, "Text is Required"],
   },
-  desc: {
+  Desc: {
     type: String,
     required: [true, "Text is Required"],
   },
-  Subtitle: {
+  Url: {
     type: String,
     required: [true, "Text is Required"],
   },

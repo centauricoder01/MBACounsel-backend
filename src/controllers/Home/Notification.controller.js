@@ -7,7 +7,7 @@ const addNotification = async (req, res) => {
       Text: text,
     });
 
-    return res.status(201).json({ message: "Banner Created successfully" });
+    return res.status(201).json({ message: "Notification Created successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error", error });
   }
