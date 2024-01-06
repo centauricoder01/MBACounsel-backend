@@ -5,18 +5,14 @@ const addBanner = async (req, res) => {
   try {
     const { bannerText } = req.body;
     let bannerImageLocalPath;
-    if (
-      req.files &&
-      Array.isArray(req.files.Img) &&
-      req.files.Img.length > 0
-    ) {
+    if (req.files && Array.isArray(req.files.Img) && req.files.Img.length > 0) {
       bannerImageLocalPath = req.files.Img[0].path;
     }
 
     const bannerImg = await uploadOnCloudinary(bannerImageLocalPath);
     await Banner.create({
-      bannerText,
-      bannerImg: bannerImg?.url || "",
+      Text: bannerText,
+      Img: bannerImg?.url || "",
     });
 
     return res.status(201).json({ message: "Banner Created successfully" });

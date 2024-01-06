@@ -7,8 +7,11 @@ const addNotification = async (req, res) => {
       Text: text,
     });
 
-    return res.status(201).json({ message: "Notification Created successfully" });
+    return res
+      .status(201)
+      .json({ message: "Notification Created successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal server error", error });
   }
 };
@@ -55,9 +58,7 @@ const updateNotification = async (req, res) => {
       message: "Document updated successfully",
       updatedDocument,
     });
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 };
 
 export {

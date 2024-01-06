@@ -5,7 +5,7 @@ const addEvent = async (req, res) => {
     const { date, title, desc } = req.body;
 
     await Event.create({
-      Data: date,
+      Date: date,
       Text: title,
       Desc: desc,
     });
