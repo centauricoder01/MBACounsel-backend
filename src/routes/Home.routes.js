@@ -24,6 +24,12 @@ import {
   getAdsBanner,
   updateAdsBanner,
 } from "../controllers/Home/AdsBanner.controller.js";
+import {
+  addLatestNews,
+  deleteLatestNews,
+  getLatestNews,
+  updateLatestNews,
+} from "../controllers/Home/LatestNews.controller.js";
 
 const router = Router();
 
@@ -58,5 +64,23 @@ router.route("/addadsbanner").post(addAdsBanner);
 router.route("/updateadsbanner").put(updateAdsBanner);
 router.route("/getadsbanner").get(getAdsBanner);
 router.route("/deleteadsbanner").delete(deleteAdsBanner);
+
+// Latest News
+router.route("/addlatestnews").post(addLatestNews);
+router.route("/updatelatestnews").put(updateLatestNews);
+router.route("/getlatestnews").get(getLatestNews);
+router.route("/deletelatestnews").delete(deleteLatestNews);
+
+// Add Services
+// router.route("/addservices").post(addAdsBanner);
+// router.route("/updateservices").put(updateAdsBanner);
+// router.route("/getservices").get(getAdsBanner);
+// router.route("/deleteservices").delete(deleteAdsBanner);
+
+// Add Services
+// router.route("/addtestimonial").post(addAdsBanner);
+// router.route("/updatetestimonial").put(updateAdsBanner);
+// router.route("/gettestimonial").get(getAdsBanner);
+// router.route("/deletetestimonial").delete(deleteAdsBanner);
 
 export default router;

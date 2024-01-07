@@ -28,6 +28,7 @@ const getAdsBanner = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 };
+
 const updateAdsBanner = async (req, res) => {
   try {
     const { id, text, subtitle, desc, url } = req.body;
@@ -52,6 +53,8 @@ const updateAdsBanner = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 };
+
+
 const deleteAdsBanner = async (req, res) => {
   try {
     const { id } = req.body;
