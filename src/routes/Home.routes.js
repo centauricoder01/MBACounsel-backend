@@ -30,6 +30,12 @@ import {
   getLatestNews,
   updateLatestNews,
 } from "../controllers/Home/LatestNews.controller.js";
+import {
+  addServices,
+  deleteServices,
+  getServices,
+  updateServices,
+} from "../controllers/Home/Services.controller.js";
 
 const router = Router();
 
@@ -72,10 +78,10 @@ router.route("/getlatestnews").get(getLatestNews);
 router.route("/deletelatestnews").delete(deleteLatestNews);
 
 // Add Services
-// router.route("/addservices").post(addAdsBanner);
-// router.route("/updateservices").put(updateAdsBanner);
-// router.route("/getservices").get(getAdsBanner);
-// router.route("/deleteservices").delete(deleteAdsBanner);
+router.route("/addservices").post(addServices);
+router.route("/updateservices").put(updateServices);
+router.route("/getservices").get(getServices);
+router.route("/deleteservices").delete(deleteServices);
 
 // Add Services
 // router.route("/addtestimonial").post(addAdsBanner);
