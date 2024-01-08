@@ -3,18 +3,14 @@ import { uploadOnCloudinary } from "../../utils/Cloudinary.js";
 
 const addBanner = async (req, res) => {
   try {
-    const { bannerText } = req.body;
-    let bannerImageLocalPath;
-    if (req.files && Array.isArray(req.files.Img) && req.files.Img.length > 0) {
-      bannerImageLocalPath = req.files.Img[0].path;
+    const { Img, text } = req.body;
+    if (!Img) {
+      return res.status(404).json({ message: "Image Not found." });
     }
-
-    const bannerImg = await uploadOnCloudinary(bannerImageLocalPath);
     await Banner.create({
-      Text: bannerText,
-      Img: bannerImg?.url || "",
+      Img,
+      Text: text,
     });
-
     return res.status(201).json({ message: "Banner Created successfully" });
   } catch (error) {
     console.log(error);

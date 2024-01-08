@@ -36,17 +36,24 @@ import {
   getServices,
   updateServices,
 } from "../controllers/Home/Services.controller.js";
+import {
+  addTestimonial,
+  deleteTestimonial,
+  getTestimonial,
+  updateTestimonial,
+} from "../controllers/Home/Testimonial.controller.js";
 
 const router = Router();
 
 //Banner routes
 router.route("/addbanner").post(
-  upload.fields([
-    {
-      name: "Img",
-      maxCount: 1,
-    },
-  ]),
+  // upload.fields([
+  //   {
+  //     name: "Img",
+  //     maxCount: 1,
+  //   },
+  // ]),
+  upload.single("Img"),
   addBanner,
 );
 router.route("/getbanner").get(getBanner);
@@ -83,10 +90,10 @@ router.route("/updateservices").put(updateServices);
 router.route("/getservices").get(getServices);
 router.route("/deleteservices").delete(deleteServices);
 
-// Add Services
-// router.route("/addtestimonial").post(addAdsBanner);
-// router.route("/updatetestimonial").put(updateAdsBanner);
-// router.route("/gettestimonial").get(getAdsBanner);
-// router.route("/deletetestimonial").delete(deleteAdsBanner);
+// Add Testimonial
+router.route("/addtestimonial").post(addTestimonial);
+router.route("/updatetestimonial").put(updateTestimonial);
+router.route("/gettestimonial").get(getTestimonial);
+router.route("/deletetestimonial").delete(deleteTestimonial);
 
 export default router;
