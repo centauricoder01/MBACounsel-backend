@@ -11,7 +11,6 @@ import {
   getNotification,
   updateNotification,
 } from "../controllers/Home/Notification.controller.js";
-import { upload } from "../middlewares/multer.middleware.js";
 import {
   addEvent,
   deleteEvent,
@@ -46,16 +45,7 @@ import {
 const router = Router();
 
 //Banner routes
-router.route("/addbanner").post(
-  // upload.fields([
-  //   {
-  //     name: "Img",
-  //     maxCount: 1,
-  //   },
-  // ]),
-  upload.single("Img"),
-  addBanner,
-);
+router.route("/addbanner").post(addBanner);
 router.route("/getbanner").get(getBanner);
 router.route("/updatebanner").put(updateBanner);
 router.route("/deletebanner").delete(deleteBanner);

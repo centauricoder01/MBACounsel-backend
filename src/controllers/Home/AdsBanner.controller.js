@@ -1,4 +1,4 @@
-import { adsBanner } from "../../models/AdsBanner.model.js";
+import { adsBanner } from "../../models/Home/AdsBanner.model.js";
 
 const addAdsBanner = async (req, res) => {
   try {

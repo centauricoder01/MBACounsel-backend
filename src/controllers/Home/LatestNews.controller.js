@@ -1,4 +1,4 @@
-import { LatestNews } from "../../models/LatestNews.model.js";
+import { LatestNews } from "../../models/Home/LatestNews.model.js";
 
 const addLatestNews = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import { Services } from "../../models/Services.model.js";
+import { Services } from "../../models/Home/Services.model.js";
 
 const addServices = async (req, res) => {
   try {

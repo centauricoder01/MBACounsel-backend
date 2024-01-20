@@ -1,4 +1,4 @@
-import { Banner } from "../../models/Banner.model.js";
+import { Banner } from "../../models/Home/Banner.model.js";
 import { uploadOnCloudinary } from "../../utils/Cloudinary.js";
 
 const addBanner = async (req, res) => {
@@ -37,7 +37,7 @@ const updateBanner = async (req, res) => {
     const { id, text } = req.body;
     const updatedDocument = await Banner.findByIdAndUpdate(
       id,
-      { $set: { bannerText: text } },
+      { $set: { Text: text } },
       { new: true },
     );
     if (!updatedDocument) {
