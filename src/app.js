@@ -17,11 +17,13 @@ app.use(express.static("public"));
 
 //routes import
 import homeRouter from "./routes/Home.routes.js";
+import collegeRouter from "./routes/College.routes.js";
 
 //routes declaration
 app.get("/api/v1", (req, res) =>
   res.send({ message: "Welcome Back, I am calling from MBACousel Backend" }),
 );
 app.use("/api/v1/home", homeRouter);
+app.use("/api/v1/college", collegeRouter);
 
 export { app };
