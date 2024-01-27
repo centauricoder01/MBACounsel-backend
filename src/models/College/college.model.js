@@ -31,27 +31,31 @@ const collegeSchema = new Schema({
     type: String,
     require: [true, "city is Required"],
   },
-  establishyear: {
+  collegeEstYear: {
     type: String,
     require: [true, "Establish year is Required"],
   },
-  accreditation: {
+  collegeAccreditation: {
     type: [String],
     require: [true, "Accreditation year is Required"],
   },
-  affiliation: {
+  collegeAffiliation: {
     type: String,
     require: [true, "affiliation is Required"],
   },
-  collegeentranceexam: {
+  collegeEntranceExam: {
     type: [String],
     require: [true, "Entrance Exam is Required"],
   },
-  collegeavgpackage: {
+  collegeAvgPackage: {
     type: [String],
     require: [true, "average package is Required"],
   },
-  collegerating: {
+  collegeRating: {
+    type: [String],
+    require: [true, "Rating is Required"],
+  },
+  collegecoursespecilzationfees: {
     type: [String],
     require: [true, "Rating is Required"],
   },
@@ -59,10 +63,80 @@ const collegeSchema = new Schema({
     type: [CourseSchema],
     required: [true, "At least one course is required"],
   },
-  overview: {
+  collegeOverview: {
     type: String,
     required: [true, "Overview is required"],
+  },
+  collegePrograms: {
+    type: String,
+    required: [true, "Programs is required"],
+  },
+  collegeAdmission: {
+    type: String,
+    required: [true, "Admission is required"],
+  },
+  collegePlacement: {
+    type: String,
+    required: [true, "Overview is required"],
+  },
+  collegeCampusLife: {
+    type: String,
+    required: [true, "Campus Life is required"],
+  },
+  collegeCollegeUrl: {
+    type: String,
+    required: [true, "College URL is required"],
+  },
+  collegeTitle: {
+    type: String,
+    required: [true, "Title is required"],
+  },
+  collegeKeyDecription: {
+    type: String,
+    required: [true, "Key Description is required"],
+  },
+  collegeMetaDescription: {
+    type: String,
+    required: [true, "Meta Description is required"],
+  },
+  collegefaqs: {
+    type: [String],
+    required: [true, "FAQs is required"],
+  },
+  collegeFeatured: {
+    type: Boolean,
+    required: [true, "Featured is required"],
+  },
+  collegeRecommended: {
+    type: Boolean,
+    required: [true, "Recommended is required"],
   },
 });
 
 export const college = mongoose.model("college", collegeSchema);
+
+//  collegeName: "",
+//     collegeLogo: "",
+//     collegePhoto: "",
+//     collegeBroucher: "broucherLink",
+//     collegeState: "",
+//     collegeCity: "",
+//     collegeEstYear: "",
+//     collegeAccreditation: [],
+//     collegeAffiliation: "",
+//     collegeEntranceExam: [],
+//     collegeAvgPackage: "",
+//     collegeRating: "",
+//     collegecoursespecilzationfees: [],
+//     collegeOverview: "",
+//     collegePrograms: "",
+//     collegeAdmission: "",
+//     collegePlacement: "",
+//     collegeCampusLife: "",
+//     collegeCollegeUrl: "",
+//     collegeTitle: "",
+//     collegeKeyDecription: "",
+//     collegeMetaDescription: "",
+//     collegefaqs: [],
+//     collegeFeatured: false,
+//     collegeRecommended: false,
