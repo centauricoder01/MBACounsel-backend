@@ -7,27 +7,27 @@ const CourseSchema = new mongoose.Schema({
 });
 
 const collegeSchema = new Schema({
-  collegename: {
+  collegeName: {
     type: String,
     required: [true, "name is Required"],
   },
-  collegelogo: {
+  collegeLogo: {
     type: String,
     required: [true, "logo is Required"],
   },
-  collegephoto: {
+  collegePhoto: {
     type: String,
     required: [true, "photo is Required"],
   },
-  collegebroucher: {
+  collegeBroucher: {
     type: String,
     required: [true, "broucher is Required"],
   },
-  collegestate: {
+  collegeState: {
     type: String,
     require: [true, "state is Required"],
   },
-  collegecity: {
+  collegeCity: {
     type: String,
     require: [true, "city is Required"],
   },
@@ -100,7 +100,7 @@ const collegeSchema = new Schema({
     required: [true, "Meta Description is required"],
   },
   collegefaqs: {
-    type: [String],
+    type: [],
     required: [true, "FAQs is required"],
   },
   collegeFeatured: {
@@ -114,29 +114,3 @@ const collegeSchema = new Schema({
 });
 
 export const college = mongoose.model("college", collegeSchema);
-
-//  collegeName: "",
-//     collegeLogo: "",
-//     collegePhoto: "",
-//     collegeBroucher: "broucherLink",
-//     collegeState: "",
-//     collegeCity: "",
-//     collegeEstYear: "",
-//     collegeAccreditation: [],
-//     collegeAffiliation: "",
-//     collegeEntranceExam: [],
-//     collegeAvgPackage: "",
-//     collegeRating: "",
-//     collegecoursespecilzationfees: [],
-//     collegeOverview: "",
-//     collegePrograms: "",
-//     collegeAdmission: "",
-//     collegePlacement: "",
-//     collegeCampusLife: "",
-//     collegeCollegeUrl: "",
-//     collegeTitle: "",
-//     collegeKeyDecription: "",
-//     collegeMetaDescription: "",
-//     collegefaqs: [],
-//     collegeFeatured: false,
-//     collegeRecommended: false,
