@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const CourseSchema = new mongoose.Schema({
   course: { type: String, required: true },
-  specialization: { type: String, required: true },
+  specialization: [{ type: String, required: true }],
   fees: { type: Number, required: true },
 });
 
@@ -48,21 +48,21 @@ const collegeSchema = new Schema({
     require: [true, "Entrance Exam is Required"],
   },
   collegeAvgPackage: {
-    type: [String],
+    type: String,
     require: [true, "average package is Required"],
   },
   collegeRating: {
-    type: [String],
+    type: String,
     require: [true, "Rating is Required"],
   },
   collegecoursespecilzationfees: {
-    type: [String],
+    type: [CourseSchema],
     require: [true, "Rating is Required"],
   },
-  courses: {
-    type: [CourseSchema],
-    required: [true, "At least one course is required"],
-  },
+  // courses: {
+  //   type: [],
+  //   required: [true, "At least one course is required"],
+  // },
   collegeOverview: {
     type: String,
     required: [true, "Overview is required"],
