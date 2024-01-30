@@ -23,6 +23,19 @@ const getCollege = async (req, res) => {
   }
 };
 
+const getCollegeById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const collegeById = await college.findById(id);
+    console.log(collegeById);
+    res.status(201).json({ message: "College Available", collegeById });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
 const updateCollege = async (req, res) => {
   try {
     const { id, updates } = req.body;
@@ -74,4 +87,4 @@ const deletecollege = async (req, res) => {
   }
 };
 
-export { addCollege, getCollege, updateCollege, deletecollege };
+export { addCollege, getCollege, updateCollege, deletecollege, getCollegeById };

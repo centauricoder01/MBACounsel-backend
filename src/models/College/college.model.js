@@ -59,10 +59,7 @@ const collegeSchema = new Schema({
     type: [CourseSchema],
     require: [true, "Rating is Required"],
   },
-  // courses: {
-  //   type: [],
-  //   required: [true, "At least one course is required"],
-  // },
+
   collegeOverview: {
     type: String,
     required: [true, "Overview is required"],
