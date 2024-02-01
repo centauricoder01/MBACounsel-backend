@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 const addCollege = async (req, res) => {
   try {
     const body = req.body;
-    console.log(body);
     await college.create(body);
     res.status(201).json({ message: "College Added" });
   } catch (error) {
@@ -26,9 +25,7 @@ const getCollege = async (req, res) => {
 const getCollegeById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const collegeById = await college.findById(id);
-    console.log(collegeById);
     res.status(201).json({ message: "College Available", collegeById });
   } catch (error) {
     console.log(error);
@@ -38,7 +35,7 @@ const getCollegeById = async (req, res) => {
 
 const updateCollege = async (req, res) => {
   try {
-    const { id, updates } = req.body;
+    const { id, catchinput } = req.body;
     const college = await mongoose.model("college").findById(id);
 
     if (!college) {
@@ -46,8 +43,7 @@ const updateCollege = async (req, res) => {
     }
 
     const allowedUpdates = Object.keys(mongoose.model("college").schema.obj);
-    console.log(allowedUpdates, "AllowedUpdates");
-    const isValidOperation = Object.keys(updates).every((update) =>
+    const isValidOperation = Object.keys(catchinput).every((update) =>
       allowedUpdates.includes(update),
     );
 
@@ -55,15 +51,13 @@ const updateCollege = async (req, res) => {
       return res.status(400).send({ error: "Invalid updates!" });
     }
 
-    Object.keys(updates).forEach((update) => {
-      college[update] = updates[update];
+    Object.keys(catchinput).forEach((update) => {
+      college[update] = catchinput[update];
     });
 
     await college.save();
 
-    res.send({ message: "College updated successfully", college });
-
-    res.status(201).json({ message: "College Updated" });
+    res.status(201).json({ message: "College updated successfully", college });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error", error });
