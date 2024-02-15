@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
-const accreditationSchema = new Schema({
-  accreditationValue: {
+const accreditionSchema = new Schema({
+  accreditionValue: {
     type: String,
-    required: [true, "Accreditation Value is Required"],
+    required: [true, "Accredition Value is Required"],
   },
 });
 
-export const sccreditation = mongoose.model("accreditation", accreditationSchema);
+export const accredition = mongoose.model("accredition", accreditionSchema);
