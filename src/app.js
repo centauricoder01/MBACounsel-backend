@@ -18,6 +18,7 @@ app.use(express.static("public"));
 //routes import
 import homeRouter from "./routes/Home.routes.js";
 import collegeRouter from "./routes/College.routes.js";
+import attributeRouter from "./routes/Attribute.routes.js";
 
 //routes declaration
 app.get("/api/v1", (req, res) =>
@@ -25,5 +26,6 @@ app.get("/api/v1", (req, res) =>
 );
 app.use("/api/v1/home", homeRouter);
 app.use("/api/v1/college", collegeRouter);
+app.use("/api/v1/attribute", attributeRouter);
 
 export { app };
