@@ -95,25 +95,25 @@ router.route("/deletecollegetype").delete(DeleteCollegeType);
 // Course Type
 router.route("/addcourse").post(AddCourse);
 router.route("/getcourse").get(GetCourse);
-router.route("updatecourse").put(UpdateCourse);
-router.route("deletecourse").delete(DeleteCourse);
+router.route("/updatecourse").put(UpdateCourse);
+router.route("/deletecourse").delete(DeleteCourse);
 
 // Entrance Exam Type
 router.route("/addentranceexam").post(AddEntranceExam);
 router.route("/getentranceexam").get(GetEntranceExam);
-router.route("updateentranceexam").put(UpdateEntranceExam);
-router.route("deleteentranceexam").delete(DeleteEntranceExam);
+router.route("/updateentranceexam").put(UpdateEntranceExam);
+router.route("/deleteentranceexam").delete(DeleteEntranceExam);
 
 // Specilization Exam Type
-router.route("/addspecilization").post(AddSpecilization);
+router.route("/addspecilization").post(AddSpecilization); 
 router.route("/getspecilization").get(GetSpecilization);
-router.route("updatespecilization").put(UpdateSpecilization);
-router.route("deletespecilization").delete(DeleteSpecilization);
+router.route("/updatespecilization").put(UpdateSpecilization);
+router.route("/deletespecilization").delete(DeleteSpecilization);
 
 // state type
 router.route("/addstate").post(AddState);
 router.route("/getstate").get(GetState);
-router.route("updatestate").put(UpdateState);
-router.route("deletestate").delete(DeleteState);
+router.route("/updatestate").put(UpdateState);
+router.route("/deletestate").delete(DeleteState);
 
 export default router;
