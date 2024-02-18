@@ -3,7 +3,6 @@ import { specilization } from "../../models/Attribute/AddSpecilization.model.js"
 const AddSpecilization = async (req, res) => {
   try {
     const { coursevalue, specilizationvalue } = req.body;
-    console.log(coursevalue, specilizationvalue);
     if (!coursevalue || !specilizationvalue) {
       return res.status(400).json({ message: "Value are Required" });
     }
@@ -35,21 +34,31 @@ const GetSpecilization = async (req, res) => {
 
 const UpdateSpecilization = async (req, res) => {
   try {
-    const { id, coursevalue, specilizationvalue } = req.body;
-    const updatedDocument = await specilization.findByIdAndUpdate(
-      id,
-      {
-        $set: {
-          courseValue: coursevalue,
-          specilizationValue: specilizationvalue,
-        },
-      },
-      { new: true },
-    );
-    if (!updatedDocument) {
-      return res.status(404).json({ message: "Document not found" });
+    const { id, specilizationVal } = req.body;
+    const specilizatinValue = await specilization.findById(id);
+
+    if (!specilizatinValue) {
+      return res.status(404).send({ message: "Specilization not found" });
     }
-    res.json({ message: "Specilizatoi updated successfully", updatedDocument });
+
+    const allowedUpdates = Object.keys(specilization.schema.obj);
+    const isValidOperation = Object.keys(specilizationVal).every((update) =>
+      allowedUpdates.includes(update),
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+
+    Object.keys(specilizationVal).forEach((update) => {
+      specilizatinValue[update] = specilizationVal[update];
+    });
+
+    await specilizatinValue.save();
+
+    res
+      .status(201)
+      .json({ message: "College updated successfully", specilizatinValue });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error", error });

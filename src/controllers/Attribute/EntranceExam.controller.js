@@ -29,21 +29,31 @@ const GetEntranceExam = async (req, res) => {
 
 const UpdateEntranceExam = async (req, res) => {
   try {
-    const { id, shortform, fullform } = req.body;
-    const updatedDocument = await entranceExam.findByIdAndUpdate(
-      id,
-      {
-        $set: {
-          entranceExamShortForm: shortform,
-          entranceExamFullForm: fullform,
-        },
-      },
-      { new: true },
-    );
-    if (!updatedDocument) {
-      return res.status(404).json({ message: "Document not found" });
+    const { id, entranceexam } = req.body;
+    const EntranceExamValue = await entranceExam.findById(id);
+
+    if (!EntranceExamValue) {
+      return res.status(404).send({ message: "Entrance exam not found" });
     }
-    res.json({ message: "Exam updated successfully", updatedDocument });
+
+    const allowedUpdates = Object.keys(entranceExam.schema.obj);
+    const isValidOperation = Object.keys(entranceexam).every((update) =>
+      allowedUpdates.includes(update),
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+
+    Object.keys(entranceexam).forEach((update) => {
+      EntranceExamValue[update] = entranceexam[update];
+    });
+
+    await EntranceExamValue.save();
+
+    res
+      .status(201)
+      .json({ message: "College updated successfully", EntranceExamValue });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error", error });

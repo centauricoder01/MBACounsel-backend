@@ -29,21 +29,31 @@ const GetCity = async (req, res) => {
 
 const UpdateCity = async (req, res) => {
   try {
-    const { id, statevalue, cityvalue } = req.body;
-    const updatedDocument = await city.findByIdAndUpdate(
-      id,
-      {
-        $set: {
-          stateValue: statevalue,
-          cityValue: cityvalue,
-        },
-      },
-      { new: true },
-    );
-    if (!updatedDocument) {
-      return res.status(404).json({ message: "Document not found" });
+    const { id, cityVal } = req.body;
+    const cityValue = await city.findById(id);
+
+    if (!cityValue) {
+      return res.status(404).send({ message: "City not found" });
     }
-    res.json({ message: "Document updated successfully", updatedDocument });
+
+    const allowedUpdates = Object.keys(city.schema.obj);
+    const isValidOperation = Object.keys(cityVal).every((update) =>
+      allowedUpdates.includes(update),
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+
+    Object.keys(cityVal).forEach((update) => {
+      cityValue[update] = cityVal[update];
+    });
+
+    await cityValue.save();
+
+    res
+      .status(201)
+      .json({ message: "College updated successfully", cityValue });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error", error });
