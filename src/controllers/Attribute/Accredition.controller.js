@@ -57,7 +57,6 @@ const UpdateAccreditation = async (req, res) => {
   }
 };
 
-
 const DeleteAccreditation = async (req, res) => {
   try {
     const { id } = req.body;

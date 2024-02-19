@@ -29,21 +29,31 @@ const GetCourse = async (req, res) => {
 
 const UpdateCourse = async (req, res) => {
   try {
-    const { id, courseimg, courseval } = req.body;
-    const updatedDocument = await courses.findByIdAndUpdate(
-      id,
-      {
-        $set: {
-          courseImage: courseimg,
-          coursesValue: courseval,
-        },
-      },
-      { new: true },
-    );
-    if (!updatedDocument) {
-      return res.status(404).json({ message: "Document not found" });
+    const { id, couseVal } = req.body;
+    const couseValue = await courses.findById(id);
+
+    if (!couseValue) {
+      return res.status(404).send({ message: "City not found" });
     }
-    res.json({ message: "Courses updated successfully", updatedDocument });
+
+    const allowedUpdates = Object.keys(courses.schema.obj);
+    const isValidOperation = Object.keys(couseVal).every((update) =>
+      allowedUpdates.includes(update),
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+
+    Object.keys(couseVal).forEach((update) => {
+      couseValue[update] = couseVal[update];
+    });
+
+    await couseValue.save();
+
+    res
+      .status(201)
+      .json({ message: "College updated successfully", couseValue });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error", error });
