@@ -1,5 +1,4 @@
-import { exam } from "../../models/Exam/Exam.model";
-import mongoose from "mongoose";
+import { exam } from "../../models/Exam/Exam.model.js";
 import Joi from "joi";
 
 export const addExam = async (req, res) => {

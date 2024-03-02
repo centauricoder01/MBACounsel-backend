@@ -1,3 +1,5 @@
+import mongoose, {Schema} from "mongoose";
+
 const examSchema = new Schema({
   examNameFullForm: {
     type: String,

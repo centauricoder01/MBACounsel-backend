@@ -5,7 +5,7 @@ import {
   getExam,
   updateExam,
   deleteExam,
-} from "../controllers/Exam/Exam.controller";
+} from "../controllers/Exam/Exam.controller.js";
 
 const router = Router();
 
