@@ -1,5 +1,6 @@
 import { exam } from "../../models/Exam/Exam.model.js";
 import Joi from "joi";
+import mongoose from "mongoose";
 
 export const addExam = async (req, res) => {
   try {
@@ -60,7 +61,33 @@ export const getExam = async (req, res) => {
 
 export const updateExam = async (req, res) => {
   try {
-  } catch (error) {}
+    const { id, catchinput } = req.body;
+    const exam = await mongoose.model("exam").findById(id);
+
+    if (!exam) {
+      return res.status(404).send({ message: "Exam not found" });
+    }
+
+    const allowedUpdates = Object.keys(mongoose.model("exam").schema.obj);
+    const isValidOperation = Object.keys(catchinput).every((update) =>
+      allowedUpdates.includes(update),
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+
+    Object.keys(catchinput).forEach((update) => {
+      exam[update] = catchinput[update];
+    });
+
+    await exam.save();
+
+    res.status(201).json({ message: "Exam updated successfully", exam });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
 };
 
 export const deleteExam = async (req, res) => {
