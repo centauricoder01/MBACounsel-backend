@@ -92,5 +92,25 @@ export const updateExam = async (req, res) => {
 
 export const deleteExam = async (req, res) => {
   try {
-  } catch (error) {}
+    const { id } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid document ID" });
+    }
+
+    const deletedDocument = await exam.findByIdAndDelete(id);
+
+    if (!deletedDocument) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+
+    return res.status(200).json({
+      message: "Document deleted successfully",
+      deletedDocument,
+    });
+  } catch (error) {
+    console.error("Error deleting document:", error);
+
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
