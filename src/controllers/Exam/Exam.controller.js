@@ -83,7 +83,7 @@ export const getExamById = async (req, res) => {
 
 export const updateExam = async (req, res) => {
   try {
-    const { id, catchinput } = req.body;
+    const { id, mainEditExamData } = req.body;
     const exam = await mongoose.model("exam").findById(id);
 
     if (!exam) {
@@ -91,7 +91,7 @@ export const updateExam = async (req, res) => {
     }
 
     const allowedUpdates = Object.keys(mongoose.model("exam").schema.obj);
-    const isValidOperation = Object.keys(catchinput).every((update) =>
+    const isValidOperation = Object.keys(mainEditExamData).every((update) =>
       allowedUpdates.includes(update),
     );
 
@@ -99,8 +99,8 @@ export const updateExam = async (req, res) => {
       return res.status(400).send({ error: "Invalid updates!" });
     }
 
-    Object.keys(catchinput).forEach((update) => {
-      exam[update] = catchinput[update];
+    Object.keys(mainEditExamData).forEach((update) => {
+      exam[update] = mainEditExamData[update];
     });
 
     await exam.save();

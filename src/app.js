@@ -30,4 +30,6 @@ app.use("/api/v1/college", collegeRouter);
 app.use("/api/v1/attribute", attributeRouter);
 app.use("/api/v1/exam", examRouter);
 
+
+
 export { app };

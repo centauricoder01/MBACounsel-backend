@@ -15,7 +15,7 @@ const router = Router();
 router.route("/addexam").post(addExam);
 router.route("/getexam").get(getExam);
 router.route("/getexam/:id").get(getExamById);
-router.route("/updateexam").put(updateExam);
+router.route("/updateingexam").put(updateExam);
 router.route("/deleteexam").delete(deleteExam);
 
 export default router;
