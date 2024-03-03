@@ -5,6 +5,7 @@ import {
   getExam,
   updateExam,
   deleteExam,
+  getExamById,
 } from "../controllers/Exam/Exam.controller.js";
 
 const router = Router();
@@ -13,6 +14,7 @@ const router = Router();
 
 router.route("/addexam").post(addExam);
 router.route("/getexam").get(getExam);
+router.route("/getexam/:id").get(getExamById);
 router.route("/updateexam").put(updateExam);
 router.route("/deleteexam").delete(deleteExam);
 
