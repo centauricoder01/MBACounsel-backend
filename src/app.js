@@ -20,6 +20,7 @@ import homeRouter from "./routes/Home.routes.js";
 import collegeRouter from "./routes/College.routes.js";
 import attributeRouter from "./routes/Attribute.routes.js";
 import examRouter from "./routes/Exam.routes.js";
+import newsRouter from "./routes/News.routes.js";
 
 //routes declaration
 app.get("/api/v1", (req, res) =>
@@ -29,7 +30,6 @@ app.use("/api/v1/home", homeRouter);
 app.use("/api/v1/college", collegeRouter);
 app.use("/api/v1/attribute", attributeRouter);
 app.use("/api/v1/exam", examRouter);
-
-
+app.use("/api/v1/news", newsRouter);
 
 export { app };
