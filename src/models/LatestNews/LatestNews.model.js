@@ -42,3 +42,5 @@ const latestNewsSchema = new Schema({
     required: [true, "Description is required"],
   },
 });
+
+export const LatestNews = mongoose.model("latestnews", latestNewsSchema);
