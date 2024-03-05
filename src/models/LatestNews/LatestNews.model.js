@@ -25,15 +25,15 @@ const latestNewsSchema = new Schema({
     type: String,
     required: [true, "Entrance Exam is required"],
   },
-  slugurl: {
+  SlugUrl: {
     type: String,
     required: [true, "Slug URL is required"],
   },
-  metaTitle: {
+  MetaTitle: {
     type: String,
     required: [true, "Meta Title is required"],
   },
-  metaDescription: {
+  MetaDescription: {
     type: String,
     required: [true, "Meta Description is required"],
   },

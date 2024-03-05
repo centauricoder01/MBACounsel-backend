@@ -1,13 +1,15 @@
-import { LatestNews } from "../../models/LatestNews/LatestNews.model";
+import Joi from "joi";
+import { LatestNews } from "../../models/LatestNews/LatestNews.model.js";
+import mongoose from "mongoose";
 
 export const addNews = async (req, res) => {
   try {
     const schema = Joi.object({
       Image: Joi.string().required(),
       Date: Joi.date().iso().required(),
-      Title: Joi.string().required(),
+      title: Joi.string().required(),
       Course: Joi.string().required(),
-      Specialization: Joi.string().required(),
+      Specilization: Joi.string().required(),
       EntranceExam: Joi.string().required(),
       SlugUrl: Joi.string().required(),
       MetaTitle: Joi.string().required(),
@@ -23,7 +25,7 @@ export const addNews = async (req, res) => {
     const newsItem = new LatestNews(req.body);
     const data = await newsItem.save();
 
-    res.send({ message: "New Has been Added", data });
+    res.send({ message: "News Has been Added", data });
   } catch (error) {
     res.status(500).send({
       message:

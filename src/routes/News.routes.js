@@ -15,7 +15,7 @@ const router = Router();
 router.route("/addnews").post(addNews);
 router.route("/getnews").get(getNews);
 router.route("/getnews/:id").get(getNewsById);
-router.route("/updateingnews").put(deleteNews);
-router.route("/deletenews").delete(updateNews);
+router.route("/updateingnews").put(updateNews);
+router.route("/deletenews").delete(deleteNews);
 
 export default router;
