@@ -103,7 +103,7 @@ export const deleteNews = async (req, res) => {
 
 export const updateNews = async (req, res) => {
   try {
-    const { id, mainLatestNews } = req.body;
+    const { id, latestNewsValue } = req.body;
     const latestNews = await mongoose.model("latestnews").findById(id);
 
     if (!latestNews) {
@@ -111,7 +111,7 @@ export const updateNews = async (req, res) => {
     }
 
     const allowedUpdates = Object.keys(mongoose.model("latestnews").schema.obj);
-    const isValidOperation = Object.keys(mainLatestNews).every((update) =>
+    const isValidOperation = Object.keys(latestNewsValue).every((update) =>
       allowedUpdates.includes(update),
     );
 
@@ -119,8 +119,8 @@ export const updateNews = async (req, res) => {
       return res.status(400).send({ error: "Invalid updates!" });
     }
 
-    Object.keys(mainLatestNews).forEach((update) => {
-      latestNews[update] = mainLatestNews[update];
+    Object.keys(latestNewsValue).forEach((update) => {
+      latestNews[update] = latestNewsValue[update];
     });
 
     await latestNews.save();
