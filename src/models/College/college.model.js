@@ -57,7 +57,7 @@ const collegeSchema = new Schema({
   },
   collegecoursespecilzationfees: {
     type: [CourseSchema],
-    require: [true, "Rating is Required"],
+    require: [true, "Courses Specilization is Required"],
   },
 
   collegeOverview: {
