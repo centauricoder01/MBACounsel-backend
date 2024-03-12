@@ -1,7 +1,8 @@
 import { detailedCourses } from "../../models/Courses/Courses.model.js";
 import Joi from "joi";
+import mongoose from "mongoose";
 
-export const addCourse = async (req, res) => {
+export const addDetailedCourse = async (req, res) => {
   try {
     const schema = Joi.object({
       courseTitle: Joi.string().required(),
@@ -47,7 +48,7 @@ export const addCourse = async (req, res) => {
   }
 };
 
-export const getCourse = async (req, res) => {
+export const getDetailedCourse = async (req, res) => {
   try {
     const allCourses = await detailedCourses.find();
     res.status(200).json({
@@ -68,31 +69,31 @@ export const getCourse = async (req, res) => {
   }
 };
 
-const getByIdCourse = async (req, res) => {
-   try {
-     const { id } = req.params;
+export const getByIdDetailedCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-     if (!mongoose.Types.ObjectId.isValid(id)) {
-       return res.status(400).json({ message: "Invalid document ID" });
-     }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid document ID" });
+    }
 
-     const coursesById = await detailedCourses.findById(id);
+    const coursesById = await detailedCourses.findById(id);
 
-     if (!coursesById) {
-       return res.status(404).json({ message: "Courses not found" });
-     }
+    if (!coursesById) {
+      return res.status(404).json({ message: "Courses not found" });
+    }
 
-     return res
-       .status(200)
-       .json({ message: "Courses available", courses: coursesById });
-   } catch (error) {
-     console.error("Error fetching Course:", error);
+    return res
+      .status(200)
+      .json({ message: "Courses available", courses: coursesById });
+  } catch (error) {
+    console.error("Error fetching Course:", error);
 
-     return res.status(500).json({ message: "Internal server error" });
-   }
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
-export const updateCourse = async (req, res) => {
+export const updateDetailedCourse = async (req, res) => {
   try {
     const { id, maincourseedit } = req.body;
     const course = await mongoose.model("detailedcourses").findById(id);
@@ -126,7 +127,7 @@ export const updateCourse = async (req, res) => {
   }
 };
 
-const deleteCourse = async (req, res) => {
+export const deleteDetailedCourse = async (req, res) => {
   try {
     const { id } = req.body;
 
