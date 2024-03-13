@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const faqsSchema = new mongoose.Schema({
+  id: { type: Number },
   question: { type: String, required: [true, "Question is required"] },
   answer: { type: String, required: [true, "Answer is required"] },
 });

@@ -16,6 +16,7 @@ export const addDetailedCourse = async (req, res) => {
       faqs: Joi.array()
         .items(
           Joi.object({
+            id: Joi.number(),
             question: Joi.string().required(),
             answer: Joi.string().required(),
           }),
@@ -95,7 +96,7 @@ export const getByIdDetailedCourse = async (req, res) => {
 
 export const updateDetailedCourse = async (req, res) => {
   try {
-    const { id, maincourseedit } = req.body;
+    const { id, detailedCoursesValue } = req.body;
     const course = await mongoose.model("detailedcourses").findById(id);
 
     if (!course) {
@@ -106,7 +107,7 @@ export const updateDetailedCourse = async (req, res) => {
       mongoose.model("detailedcourses").schema.obj,
     );
 
-    const isValidOperation = Object.keys(maincourseedit).every((update) =>
+    const isValidOperation = Object.keys(detailedCoursesValue).every((update) =>
       allowedUpdates.includes(update),
     );
 
@@ -114,8 +115,8 @@ export const updateDetailedCourse = async (req, res) => {
       return res.status(400).send({ error: "Invalid updates!" });
     }
 
-    Object.keys(maincourseedit).forEach((update) => {
-      course[update] = maincourseedit[update];
+    Object.keys(detailedCoursesValue).forEach((update) => {
+      course[update] = detailedCoursesValue[update];
     });
 
     await course.save();
