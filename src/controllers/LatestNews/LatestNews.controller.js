@@ -7,14 +7,16 @@ export const addNews = async (req, res) => {
     const schema = Joi.object({
       Image: Joi.string().required(),
       Date: Joi.date().iso().required(),
+      Category: Joi.string().required(),
+      MetaKeywords: Joi.string().required(),
+      ShortDescription: Joi.string().required(),
       title: Joi.string().required(),
-      Course: Joi.string().required(),
-      Specilization: Joi.string().required(),
-      EntranceExam: Joi.string().required(),
       SlugUrl: Joi.string().required(),
       MetaTitle: Joi.string().required(),
       MetaDescription: Joi.string().required(),
       Description: Joi.string().required(),
+      TrendingNews: Joi.boolean().required(),
+      FeaturedNews: Joi.boolean().required(),
     });
 
     const { error } = schema.validate(req.body);

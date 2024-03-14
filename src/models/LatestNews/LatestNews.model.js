@@ -9,21 +9,13 @@ const latestNewsSchema = new Schema({
     type: String,
     required: [true, "Date is required"],
   },
+  Category: {
+    type: String,
+    required: [true, "Category is required"],
+  },
   title: {
     type: String,
     required: [true, "Title is required"],
-  },
-  Course: {
-    type: String,
-    required: [true, "Courses is required"],
-  },
-  Specilization: {
-    type: String,
-    required: [true, "Specilization is required"],
-  },
-  EntranceExam: {
-    type: String,
-    required: [true, "Entrance Exam is required"],
   },
   SlugUrl: {
     type: String,
@@ -37,9 +29,25 @@ const latestNewsSchema = new Schema({
     type: String,
     required: [true, "Meta Description is required"],
   },
+  MetaKeywords: {
+    type: String,
+    required: [true, "Meta Keywords is required"],
+  },
+  ShortDescription: {
+    type: String,
+    required: [true, " Short Description is Required"],
+  },
   Description: {
     type: String,
     required: [true, "Description is required"],
+  },
+  TrendingNews: {
+    type: Boolean,
+    required: [true, "Trending News Status is Required"],
+  },
+  FeaturedNews: {
+    type: Boolean,
+    required: [true, "Featured News Status is Required"],
   },
 });
 
