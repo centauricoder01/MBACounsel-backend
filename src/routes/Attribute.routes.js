@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 // ALL IMPORTS WILL BE HERE
 
 import {
@@ -64,6 +65,14 @@ import {
   UpdateState,
 } from "../controllers/Attribute/State.controller.js";
 
+// News Categories
+import {
+  AddNewCategory,
+  GetNewCategory,
+  UpdateNewCategory,
+  DeleteNewCategory,
+} from "../controllers/Attribute/AddNewsCategory.controller.js";
+
 const router = Router();
 
 // MAIN LOGIN WILL START FROM HERE
@@ -105,7 +114,7 @@ router.route("/updateentranceexam").put(UpdateEntranceExam);
 router.route("/deleteentranceexam").delete(DeleteEntranceExam);
 
 // Specilization Exam Type
-router.route("/addspecilization").post(AddSpecilization); 
+router.route("/addspecilization").post(AddSpecilization);
 router.route("/getspecilization").get(GetSpecilization);
 router.route("/updatespecilization").put(UpdateSpecilization);
 router.route("/deletespecilization").delete(DeleteSpecilization);
@@ -115,5 +124,12 @@ router.route("/addstate").post(AddState);
 router.route("/getstate").get(GetState);
 router.route("/updatestate").put(UpdateState);
 router.route("/deletestate").delete(DeleteState);
+
+// News Categories
+
+router.route("/addnewcategories").post(AddNewCategory);
+router.route("/getnewcategories").get(GetNewCategory);
+router.route("/updatenewcategories").put(UpdateNewCategory);
+router.route("/deletenewcategories").delete(DeleteNewCategory);
 
 export default router;
