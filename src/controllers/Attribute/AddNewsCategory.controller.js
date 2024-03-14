@@ -49,7 +49,7 @@ export const UpdateNewCategory = async (req, res) => {
       id,
       {
         $set: {
-          CategoryValue: NewsCategory,
+          CategoryValue: NewsCategory.CategoryValue,
         },
       },
       { new: true },
