@@ -22,6 +22,7 @@ import attributeRouter from "./routes/Attribute.routes.js";
 import examRouter from "./routes/Exam.routes.js";
 import newsRouter from "./routes/News.routes.js";
 import courseRouter from "./routes/Courses.routes.js";
+import ArticleRouter from "./routes/Article.routes.js";
 
 //routes declaration
 app.get("/api/v1", (req, res) =>
@@ -31,7 +32,8 @@ app.use("/api/v1/home", homeRouter);
 app.use("/api/v1/college", collegeRouter);
 app.use("/api/v1/attribute", attributeRouter);
 app.use("/api/v1/exam", examRouter);
-app.use("/api/v1/news", newsRouter); 
+app.use("/api/v1/news", newsRouter);
 app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/article", ArticleRouter);
 
 export { app };
