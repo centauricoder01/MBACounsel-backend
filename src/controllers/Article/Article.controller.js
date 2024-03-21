@@ -24,7 +24,7 @@ export const addArticle = async (req, res) => {
     }
 
     const ArticleItem = new article(req.body);
-    const data = await ArticleItem.save();
+    const data = await ArticleItem.save();      
 
     res.send({ message: "Article Has been Added", data });
   } catch (error) {
