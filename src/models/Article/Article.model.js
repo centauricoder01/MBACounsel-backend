@@ -21,6 +21,10 @@ const articleSchema = new Schema({
     type: String,
     required: [true, "Meta Title is required"],
   },
+  Category: {
+    type: String,
+    required: [true, "Category is required"],
+  },
   MetaDescription: {
     type: String,
     required: [true, "Meta Description is required"],

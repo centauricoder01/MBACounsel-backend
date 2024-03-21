@@ -8,6 +8,7 @@ export const addArticle = async (req, res) => {
       Image: Joi.string().required(),
       Date: Joi.date().iso().required(),
       MetaKeywords: Joi.string().required(),
+      Category: Joi.string().required(),
       ShortDescription: Joi.string().required(),
       title: Joi.string().required(),
       SlugUrl: Joi.string().required(),
