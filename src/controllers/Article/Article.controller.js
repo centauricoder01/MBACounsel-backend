@@ -1,5 +1,6 @@
 import { article } from "../../models/Article/Article.model.js";
 import mongoose from "mongoose";
+import Joi from "joi";
 
 export const addArticle = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ export const addArticle = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       message:
-        error.message || "Some error occurred while creating the news item.",
+        error.message || "Some error occurred while creating the Article item.",
     });
   }
 };
@@ -53,7 +54,7 @@ export const getArticle = async (req, res) => {
   }
 };
 
-export const updateArticleById = async (req, res) => {
+export const getArticleById = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -64,51 +65,49 @@ export const updateArticleById = async (req, res) => {
     const articleById = await article.findById(id);
 
     if (!articleById) {
-      return res.status(404).json({ message: "News not found" });
+      return res.status(404).json({ message: "Article not found" });
     }
 
     return res
       .status(200)
-      .json({ message: "News available", article: articleById });
+      .json({ message: "Article available", article: articleById });
   } catch (error) {
-    console.error("Error fetching News:", error);
+    console.error("Error fetching Article:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
 export const updateArticle = async (req, res) => {
-   try {
-     const { id, articleValue } = req.body;
-     const latestArticle = await mongoose.model("article").findById(id);
+  try {
+    const { id, articleValue } = req.body;
+    const latestArticle = await mongoose.model("article").findById(id);
 
-     if (!latestArticle) {
-       return res.status(404).send({ message: "latestArticle not found" });
-     }
+    if (!latestArticle) {
+      return res.status(404).send({ message: "latestArticle not found" });
+    }
 
-     const allowedUpdates = Object.keys(
-       mongoose.model("article").schema.obj,
-     );
-     const isValidOperation = Object.keys(articleValue).every((update) =>
-       allowedUpdates.includes(update),
-     );
+    const allowedUpdates = Object.keys(mongoose.model("article").schema.obj);
+    const isValidOperation = Object.keys(articleValue).every((update) =>
+      allowedUpdates.includes(update),
+    );
 
-     if (!isValidOperation) {
-       return res.status(400).send({ error: "Invalid updates!" });
-     }
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
 
-     Object.keys(articleValue).forEach((update) => {
-       latestArticle[update] = articleValue[update];
-     });
+    Object.keys(articleValue).forEach((update) => {
+      latestArticle[update] = articleValue[update];
+    });
 
-     await latestArticle.save();
+    await latestArticle.save();
 
-     res
-       .status(201)
-       .json({ message: "latestArticle updated successfully", latestArticle });
-   } catch (error) {
-     console.log(error);
-     res.status(500).json({ message: "Internal server error", error });
-   }
+    res
+      .status(201)
+      .json({ message: "latestArticle updated successfully", latestArticle });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
 };
 
 export const deleteArticle = async (req, res) => {
