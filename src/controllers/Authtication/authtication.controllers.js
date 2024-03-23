@@ -6,23 +6,23 @@ import { authtication } from "../../models/Authtication/Authtication.model.js";
 
 export const addAuthUser = async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(
-      req.body.password,
-      process.env.GEN_SALT,
-    );
+    const saltRounds = Number(process.env.GEN_SALT);
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
     const user = new authtication({
       name: req.body.name,
       phoneNo: req.body.phoneNo,
       currentEducation: req.body.currentEducation,
-      CourseLooking: req.body.CourseLooking,
+      location: req.body.location,
+      courseLooking: req.body.CourseLooking,
       email: req.body.email,
       password: hashedPassword,
     });
     await user.save();
     res.status(200).json({ message: "User added successfully" });
   } catch (error) {
-    res.status(500).json({ error: err.message });
+    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -48,7 +48,7 @@ export const loginAuthUser = async (req, res) => {
     });
 
     // Send the user's details and the token
-    res.json({ user, token });
+    res.json({ user, token, message : "User Login Sucessfull" });
   } catch (error) {
     res.status(500).json({ error: err.message });
   }

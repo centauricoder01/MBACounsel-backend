@@ -10,11 +10,15 @@ const authticationSchema = new Schema({
     unique: true,
     require: [true, "Phone number is Required"],
   },
+  location: {
+    type: String,
+    require: [true, "Location is Required"],
+  },
   currentEducation: {
     type: String,
     require: [true, "Education is Required"],
   },
-  CourseLooking: {
+  courseLooking: {
     type: String,
     require: [true, " Course Looking is Required"],
   },

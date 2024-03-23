@@ -10,6 +10,6 @@ const router = Router();
 
 router.route("/adduser").post(addAuthUser);
 router.route("/loginuser").post(loginAuthUser);
-router.route("/loginuser").get(getAuthUser);
+router.route("/getalluser").get(getAuthUser);
 
 export default router;
