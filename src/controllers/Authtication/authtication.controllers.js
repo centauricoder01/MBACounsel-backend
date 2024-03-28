@@ -107,10 +107,10 @@ export const sendVerificationMail = async (req, res) => {
       `,
     };
 
-    const result = await authtication.findOneAndUpdate(
-      { email }, // find a document with that filter
-      { otp: randomOTP }, // document to insert when nothing was found
-      { new: true }, // options
+    await authtication.findOneAndUpdate(
+      { email },
+      { otp: randomOTP },
+      { new: true },
     );
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -122,13 +122,26 @@ export const sendVerificationMail = async (req, res) => {
       }
     });
   } catch (error) {
-    res.json(400).send({ message: "some Error occured", error });
+    res.json(500).send({ message: "some Error occured", error });
   }
 };
 
-export const verifyMail = async (req, res) => {
+export const verifyOtp = async (req, res) => {
   try {
-  } catch (error) {}
+    const { email, otp } = req.body;
+    const user = await authtication.findOne({ email: email });
+    if (!user) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+
+    if (user.otp === otp) {
+      res.status(200).json({ message: "OTP Verified, Access Granted" });
+    } else {
+      res.status(400).json({ message: "OTP not verified, Access Denied" });
+    }
+  } catch (error) {
+    res.json(500).send({ message: "some Error occured", error });
+  }
 };
 
 export const deleteAuthUser = async (req, res) => {
