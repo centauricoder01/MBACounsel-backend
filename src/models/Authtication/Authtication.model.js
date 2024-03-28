@@ -29,7 +29,9 @@ const authticationSchema = new Schema({
   },
   password: {
     type: String,
-    require: [true, "Password is required"],
+  },
+  otp: {
+    type: Number,
   },
 });
 

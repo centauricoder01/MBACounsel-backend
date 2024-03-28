@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { authtication } from "../../models/Authtication/Authtication.model.js";
+import nodemailer from "nodemailer";
 
 export const addAuthUser = async (req, res) => {
   try {
@@ -48,7 +49,7 @@ export const loginAuthUser = async (req, res) => {
     });
 
     // Send the user's details and the token
-    res.json({ user, token, message : "User Login Sucessfull" });
+    res.json({ user, token, message: "User Login Sucessfull" });
   } catch (error) {
     res.status(500).json({ error: err.message });
   }
@@ -59,6 +60,7 @@ export const getAuthUser = async (req, res) => {
     const allUsers = await authtication.find();
     res.status(200).json({
       success: true,
+
       message: "All User retrieved successfully",
       data: allUsers,
     });
@@ -72,6 +74,61 @@ export const getAuthUser = async (req, res) => {
         .json({ success: false, message: "Internal server error" });
     }
   }
+};
+
+export const sendVerificationMail = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const fromemail = process.env.MAIL_USERNAME;
+    const pass = process.env.MAIL_PASSWORD;
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: fromemail,
+        pass: pass,
+      },
+    });
+
+    const randomOTP = Math.floor(Math.random() * 900000) + 100000;
+
+    let mailOptions = {
+      from: {
+        name: "cityeduguide",
+        address: fromemail,
+      },
+      to: email,
+      subject: "Verification Mail",
+      html: `<h1>Your OTP for Verification</h1>
+        <h2>${randomOTP}</h2>
+        <p>Please Don't share it with anyone and it is valid for 10 min</p>
+        <p>Enter this otp to verify your mail...</p>
+      `,
+    };
+
+    const result = await authtication.findOneAndUpdate(
+      { email }, // find a document with that filter
+      { otp: randomOTP }, // document to insert when nothing was found
+      { new: true }, // options
+    );
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.send({ message: error });
+      } else {
+        res.send({ message: info.response });
+      }
+    });
+  } catch (error) {
+    res.json(400).send({ message: "some Error occured", error });
+  }
+};
+
+export const verifyMail = async (req, res) => {
+  try {
+  } catch (error) {}
 };
 
 export const deleteAuthUser = async (req, res) => {
