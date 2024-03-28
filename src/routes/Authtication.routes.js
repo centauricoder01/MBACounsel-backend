@@ -2,18 +2,20 @@ import { Router } from "express";
 
 import {
   addAuthUser,
+  forgetPassword,
   getAuthUser,
   loginAuthUser,
   sendVerificationMail,
-  verifyOtp,
+  verifyMail,
 } from "../controllers/Authtication/authtication.controllers.js";
 
 const router = Router();
 
-router.route("/adduser").post(addAuthUser);
+router.route("/addAuthUser").post(addAuthUser);
 router.route("/loginuser").post(loginAuthUser);
 router.route("/getalluser").get(getAuthUser);
 router.route("/emailverification").post(sendVerificationMail);
-router.route("/verifyotp").post(verifyOtp);
+router.route("/verifymail").post(verifyMail);
+router.route("/forgetpassword").post(forgetPassword);
 
 export default router;

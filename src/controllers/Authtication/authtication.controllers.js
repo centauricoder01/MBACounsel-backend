@@ -1,14 +1,14 @@
 import Joi from "joi";
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { authtication } from "../../models/Authtication/Authtication.model.js";
 import nodemailer from "nodemailer";
 
 export const addAuthUser = async (req, res) => {
   try {
-    const saltRounds = Number(process.env.GEN_SALT);
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    // const saltRounds = Number(process.env.GEN_SALT);
+    // const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
     const user = new authtication({
       name: req.body.name,
@@ -17,7 +17,7 @@ export const addAuthUser = async (req, res) => {
       location: req.body.location,
       courseLooking: req.body.CourseLooking,
       email: req.body.email,
-      password: hashedPassword,
+      password: req.body.password,
     });
     await user.save();
     res.status(200).json({ message: "User added successfully" });
@@ -35,14 +35,14 @@ export const loginAuthUser = async (req, res) => {
     }
 
     // Compare the provided password with the hashed password in the database
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password,
-    );
-    if (!validPassword) {
+    // const validPassword = await bcrypt.compare(
+    //   req.body.password,
+    //   user.password,
+    // );
+
+    if (user.password !== req.body.password) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
-
     // Generate a JWT
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
@@ -95,7 +95,7 @@ export const sendVerificationMail = async (req, res) => {
 
     let mailOptions = {
       from: {
-        name: "cityeduguide",
+        name: "mbaCounsel",
         address: fromemail,
       },
       to: email,
@@ -126,7 +126,7 @@ export const sendVerificationMail = async (req, res) => {
   }
 };
 
-export const verifyOtp = async (req, res) => {
+export const verifyMail = async (req, res) => {
   try {
     const { email, otp } = req.body;
     const user = await authtication.findOne({ email: email });
@@ -139,6 +139,54 @@ export const verifyOtp = async (req, res) => {
     } else {
       res.status(400).json({ message: "OTP not verified, Access Denied" });
     }
+  } catch (error) {
+    res.json(500).send({ message: "some Error occured", error });
+  }
+};
+
+export const forgetPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const findUserByEmail = await authtication.findOne({ email });
+    if (!findUserByEmail) {
+      res.status(400).json({ message: "User Not found with this Email" });
+    }
+
+    // MAIN LOGIN FOR SENDING MAIL START FROM HERE
+
+    const fromemail = process.env.MAIL_USERNAME;
+    const pass = process.env.MAIL_PASSWORD;
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: fromemail,
+        pass: pass,
+      },
+    });
+
+    let mailOptions = {
+      from: {
+        name: "mbaCounsel",
+        address: fromemail,
+      },
+      to: email,
+      subject: "Account ID and Password",
+      text: `This is your User Id : ${email} and  Password : ${findUserByEmail.password} .`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.send({ message: error });
+      } else {
+        res.send({
+          status: info.response,
+          message: "Email send sucessfully to the user",
+        });
+      }
+    });
+
   } catch (error) {
     res.json(500).send({ message: "some Error occured", error });
   }
