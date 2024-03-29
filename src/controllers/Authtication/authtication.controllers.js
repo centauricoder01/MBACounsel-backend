@@ -135,6 +135,8 @@ export const verifyMail = async (req, res) => {
     }
 
     if (user.otp === otp) {
+      user.emailverified = true;
+      await user.save();
       res.status(200).json({ message: "OTP Verified, Access Granted" });
     } else {
       res.status(400).json({ message: "OTP not verified, Access Denied" });
@@ -149,7 +151,9 @@ export const forgetPassword = async (req, res) => {
     const { email } = req.body;
     const findUserByEmail = await authtication.findOne({ email });
     if (!findUserByEmail) {
-      res.status(400).json({ message: "User Not found with this Email" });
+      return res
+        .status(400)
+        .json({ message: "User Not found with this Email" });
     }
 
     // MAIN LOGIN FOR SENDING MAIL START FROM HERE
@@ -186,7 +190,6 @@ export const forgetPassword = async (req, res) => {
         });
       }
     });
-
   } catch (error) {
     res.json(500).send({ message: "some Error occured", error });
   }

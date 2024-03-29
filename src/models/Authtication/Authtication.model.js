@@ -27,6 +27,14 @@ const authticationSchema = new Schema({
     require: [true, "Email is required "],
     unique: true,
   },
+  googleLogin: {
+    type: Boolean,
+    default: false,
+  },
+  emailverified: {
+    type: Boolean,
+    default: false,
+  },
   password: {
     type: String,
   },
