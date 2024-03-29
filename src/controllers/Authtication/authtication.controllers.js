@@ -9,16 +9,8 @@ export const addAuthUser = async (req, res) => {
   try {
     // const saltRounds = Number(process.env.GEN_SALT);
     // const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-
-    const user = new authtication({
-      name: req.body.name,
-      phoneNo: req.body.phoneNo,
-      currentEducation: req.body.currentEducation,
-      location: req.body.location,
-      courseLooking: req.body.CourseLooking,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    
+    const user = new authtication(req.body);
     await user.save();
     res.status(200).json({ message: "User added successfully" });
   } catch (error) {
