@@ -9,6 +9,7 @@ app.use(
       "http://localhost:3000",
       "https://mbacounsel.com",
       "https://www.mbacounsel.com",
+      "http://148.66.155.154:3002",
     ], // Allow localhost and both www and non-www domain
     credentials: true,
   })
