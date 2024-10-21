@@ -83,10 +83,14 @@ export const loginAuthUser = async (req, res) => {
     }
 
     // Generate a JWT
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "10d",
-      algorithm: "HS256", // Explicit algorithm
-    });
+    const token = jwt.sign(
+      { _id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "10d",
+        algorithm: "HS256", // Explicit algorithm
+      }
+    );
 
     // Send a sanitized user object and token
 
@@ -104,27 +108,6 @@ export const loginAuthUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
-  }
-};
-
-export const getAuthUser = async (req, res) => {
-  try {
-    const allUsers = await Authentication.find();
-    res.status(200).json({
-      success: true,
-
-      message: "All User retrieved successfully",
-      data: allUsers,
-    });
-  } catch (error) {
-    console.error(error);
-    if (error.name === "ValidationError") {
-      res.status(400).json({ message: error.message });
-    } else {
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
-    }
   }
 };
 
@@ -156,6 +139,27 @@ export const verifyMail = async (req, res) => {
       .json({ success: true, message: "Email verified successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Some Error occured", error });
+  }
+};
+
+export const getAuthUser = async (req, res) => {
+  try {
+    const allUsers = await Authentication.find();
+    res.status(200).json({
+      success: true,
+
+      message: "All User retrieved successfully",
+      data: allUsers,
+    });
+  } catch (error) {
+    console.error(error);
+    if (error.name === "ValidationError") {
+      res.status(400).json({ message: error.message });
+    } else {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
   }
 };
 
