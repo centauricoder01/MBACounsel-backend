@@ -104,7 +104,7 @@ export const loginAuthUser = async (req, res) => {
     // Send back user data, but exclude sensitive information like passwords
     return res.status(200).json({
       message: "Login successful",
-      user: { email: user.email, name: user.name },
+      user: { email: user.email, name: user.name, role: user.role },
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
