@@ -72,64 +72,89 @@ import {
   UpdateNewCategory,
   DeleteNewCategory,
 } from "../controllers/Attribute/AddNewsCategory.controller.js";
+import verifyAdminMiddleware from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 // MAIN LOGIN WILL START FROM HERE
 
 // Accredition part
-router.route("/addaccredition").post(AddAccreditation);
+router.route("/addaccredition").post(verifyAdminMiddleware, AddAccreditation);
 router.route("/getaccredition").get(GetAccreditation);
-router.route("/updateaccredition").put(UpdateAccreditation);
-router.route("/deleteaccredition").delete(DeleteAccreditation);
+router
+  .route("/updateaccredition")
+  .put(verifyAdminMiddleware, UpdateAccreditation);
+router
+  .route("/deleteaccredition")
+  .delete(verifyAdminMiddleware, DeleteAccreditation);
 
 // Affiliation part
-router.route("/addaffiliation").post(AddAffiliation);
+router.route("/addaffiliation").post(verifyAdminMiddleware, AddAffiliation);
 router.route("/getaffiliation").get(GetAffiliation);
-router.route("/updateaffiliation").put(UpdateAffiliation);
-router.route("/deleteaffiliation").delete(DeleteAffiliation);
+router
+  .route("/updateaffiliation")
+  .put(verifyAdminMiddleware, UpdateAffiliation);
+router
+  .route("/deleteaffiliation")
+  .delete(verifyAdminMiddleware, DeleteAffiliation);
 
 // City part
-router.route("/addcity").post(AddCity);
+router.route("/addcity").post(verifyAdminMiddleware, AddCity);
 router.route("/getcity").get(GetCity);
-router.route("/updatecity").put(UpdateCity);
-router.route("/deletecity").delete(DeleteCity);
+router.route("/updatecity").put(verifyAdminMiddleware, UpdateCity);
+router.route("/deletecity").delete(verifyAdminMiddleware, DeleteCity);
 
 // College Type
-router.route("/addcollegetype").post(AddCollegeType);
+router.route("/addcollegetype").post(verifyAdminMiddleware, AddCollegeType);
 router.route("/getcollegetype").get(GetCollegeType);
-router.route("/updatecollegetype").put(UpdateCollegeType);
-router.route("/deletecollegetype").delete(DeleteCollegeType);
+router
+  .route("/updatecollegetype")
+  .put(verifyAdminMiddleware, UpdateCollegeType);
+router
+  .route("/deletecollegetype")
+  .delete(verifyAdminMiddleware, DeleteCollegeType);
 
 // Course Type
-router.route("/addcourse").post(AddCourse);
+router.route("/addcourse").post(verifyAdminMiddleware, AddCourse);
 router.route("/getcourse").get(GetCourse);
-router.route("/updatecourse").put(UpdateCourse);
-router.route("/deletecourse").delete(DeleteCourse);
+router.route("/updatecourse").put(verifyAdminMiddleware, UpdateCourse);
+router.route("/deletecourse").delete(verifyAdminMiddleware, DeleteCourse);
 
 // Entrance Exam Type
-router.route("/addentranceexam").post(AddEntranceExam);
+router.route("/addentranceexam").post(verifyAdminMiddleware, AddEntranceExam);
 router.route("/getentranceexam").get(GetEntranceExam);
-router.route("/updateentranceexam").put(UpdateEntranceExam);
-router.route("/deleteentranceexam").delete(DeleteEntranceExam);
+router
+  .route("/updateentranceexam")
+  .put(verifyAdminMiddleware, UpdateEntranceExam);
+router
+  .route("/deleteentranceexam")
+  .delete(verifyAdminMiddleware, DeleteEntranceExam);
 
 // Specilization Exam Type
-router.route("/addspecilization").post(AddSpecilization);
+router.route("/addspecilization").post(verifyAdminMiddleware, AddSpecilization);
 router.route("/getspecilization").get(GetSpecilization);
-router.route("/updatespecilization").put(UpdateSpecilization);
-router.route("/deletespecilization").delete(DeleteSpecilization);
+router
+  .route("/updatespecilization")
+  .put(verifyAdminMiddleware, UpdateSpecilization);
+router
+  .route("/deletespecilization")
+  .delete(verifyAdminMiddleware, DeleteSpecilization);
 
 // state type
-router.route("/addstate").post(AddState);
+router.route("/addstate").post(verifyAdminMiddleware, AddState);
 router.route("/getstate").get(GetState);
-router.route("/updatestate").put(UpdateState);
-router.route("/deletestate").delete(DeleteState);
+router.route("/updatestate").put(verifyAdminMiddleware, UpdateState);
+router.route("/deletestate").delete(verifyAdminMiddleware, DeleteState);
 
 // News Categories
 
-router.route("/addnewcategories").post(AddNewCategory);
+router.route("/addnewcategories").post(verifyAdminMiddleware, AddNewCategory);
 router.route("/getnewcategories").get(GetNewCategory);
-router.route("/updatenewcategories").put(UpdateNewCategory);
-router.route("/deletenewcategories").delete(DeleteNewCategory);
+router
+  .route("/updatenewcategories")
+  .put(verifyAdminMiddleware, UpdateNewCategory);
+router
+  .route("/deletenewcategories")
+  .delete(verifyAdminMiddleware, DeleteNewCategory);
 
 export default router;
