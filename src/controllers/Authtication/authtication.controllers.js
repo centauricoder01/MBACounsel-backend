@@ -97,7 +97,7 @@ export const loginAuthUser = async (req, res) => {
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // HTTPS in production
-      sameSite: "Strict",
+      sameSite: "Lax",
       maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
     });
 
